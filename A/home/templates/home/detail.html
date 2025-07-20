@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if request.user.id == post.user.id %}
+        <a href="{% url 'home:post-delete' post.id  %}" class="btn btn-danger">Delete</a>
+        <a href="{% url 'home:post-update' post.id  %}" class="btn btn-info">Update</a>
+    {% endif %}
+
+<p><a href="{% url 'account:user_profile' post.user.id %}">{{ post.user.username }}</a> - {{ post.updated|date:"Y - M" }}</p>
+<p>{{ post.body }}</p>
+{% endblock %}

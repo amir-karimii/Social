@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 class="text-center">{{ user.username }}</h2>
+
+    {% if request.user.id == user.id %}
+        <a href="{% url 'home:post-create' %}" class="btn btn-primary">Create</a>
+    {% endif %}
+
+  <div class="card">
+    {% for post in posts %}
+      <a href="{% url 'home:post-detail' post.id post.slug %}" class="card-body">{{ post.body |truncatewords:8 }}</a>
+    {% endfor %}
+  </div>
+{% endblock %}
