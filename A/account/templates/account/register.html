@@ -1,13 +1,63 @@
 {% extends 'base.html' %}
 
-{% block content %} 
+{% block content %}
 
-<h2>Register user</h2>
+<div style="max-width: 420px; margin: 3rem auto;">
+    <div class="page-header" style="text-align: center; margin-bottom: 2rem;">
+        <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Create Account</h1>
+        <p class="text-muted-modern">Join our community today</p>
+    </div>
 
-<form action="" method="post" class="col-md-6" novalidate>
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Register">
-</form>
+    <div class="form-modern">
+        <form action="" method="post" novalidate>
+            {% csrf_token %}
+            {% for field in form %}
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="{{ field.id_for_label }}" style="display: block; margin-bottom: 0.5rem;">
+                        {{ field.label }}
+                        {% if field.field.required %}<span style="color: #dc2626;">*</span>{% endif %}
+                    </label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div style="color: #dc2626; font-size: 0.875rem; margin-top: 0.25rem;">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                    {% if field.help_text %}
+                        <div style="color: var(--text-secondary); font-size: 0.75rem; margin-top: 0.25rem;">
+                            {{ field.help_text }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn-modern btn-primary-modern" style="width: 100%; margin-bottom: 1rem;">
+                Create Account
+            </button>
+        </form>
+
+        <div style="text-align: center; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+            <p class="text-muted-modern" style="font-size: 0.875rem; margin-bottom: 0.5rem;">
+                Already have an account?
+            </p>
+            <a href="{% url 'account:user_login' %}" style="color: var(--primary-color); text-decoration: none; font-weight: 500;">
+                Sign in
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-modern input[type="text"],
+    .form-modern input[type="email"],
+    .form-modern input[type="password"] {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .form-modern form p {
+        margin-bottom: 0;
+    }
+</style>
 
 {% endblock %}

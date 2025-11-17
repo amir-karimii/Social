@@ -2,12 +2,71 @@
 
 {% block content %}
 
-<h2>Login user</h2>
+<div style="max-width: 420px; margin: 3rem auto;">
+    <div class="page-header" style="text-align: center; margin-bottom: 2rem;">
+        <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Welcome Back</h1>
+        <p class="text-muted-modern">Sign in to your account to continue</p>
+    </div>
 
-<form action="" method="post" class="col-md-6" novalidate>
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Login">
-</form>
+    <div class="form-modern">
+        <form action="" method="post" novalidate>
+            {% csrf_token %}
+            <div style="margin-bottom: 1.5rem;">
+                <label for="{{ form.username.id_for_label }}" style="display: block; margin-bottom: 0.5rem;">
+                    Username or Email
+                </label>
+                {{ form.username }}
+                {% if form.username.errors %}
+                    <div style="color: #dc2626; font-size: 0.875rem; margin-top: 0.25rem;">
+                        {{ form.username.errors }}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div style="margin-bottom: 1.5rem;">
+                <label for="{{ form.password.id_for_label }}" style="display: block; margin-bottom: 0.5rem;">
+                    Password
+                </label>
+                {{ form.password }}
+                {% if form.password.errors %}
+                    <div style="color: #dc2626; font-size: 0.875rem; margin-top: 0.25rem;">
+                        {{ form.password.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn-modern btn-primary-modern" style="width: 100%; margin-bottom: 1rem;">
+                Sign In
+            </button>
+        </form>
+
+        <div style="text-align: center; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+            <p class="text-muted-modern" style="font-size: 0.875rem; margin-bottom: 0.5rem;">
+                Don't have an account?
+            </p>
+            <a href="{% url 'account:user_register' %}" style="color: var(--primary-color); text-decoration: none; font-weight: 500;">
+                Create an account
+            </a>
+        </div>
+
+        <div style="text-align: center; margin-top: 1rem;">
+            <a href="{% url 'account:reset_password' %}" style="color: var(--text-secondary); text-decoration: none; font-size: 0.875rem;">
+                Forgot password?
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-modern input[type="text"],
+    .form-modern input[type="password"] {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .form-modern form p {
+        margin-bottom: 0;
+    }
+</style>
 
 {% endblock %}

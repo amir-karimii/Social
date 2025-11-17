@@ -1,14 +1,115 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-      <div class="navbar-nav">
-            <a class="navbar-brand" href="{% url 'home:home' %}">Navbar</a>
+<nav class="navbar-modern">
+    <div class="navbar-container">
+        <a href="{% url 'home:home' %}" class="navbar-brand-modern">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px;">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Social
+        </a>
+        <div class="navbar-links">
             {% if request.user.is_authenticated %}
-            <a class="nav-link active" href="{% url 'account:user_profile' request.user.id %} ">profile</a>
-            <a class="nav-link active" href="{% url 'account:user_logout' %}">Logout</a>
+                <a href="{% url 'account:user_profile' request.user.id %}" class="nav-link-modern">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 6px;">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Profile
+                </a>
+                <a href="{% url 'account:user_logout' %}" class="nav-link-modern nav-link-secondary">Logout</a>
             {% else %}
-            <a class="nav-link active" href="{% url 'account:user_register' %}">Register</a>
-            <a class="nav-link active" href="{% url 'account:user_login' %}">Login</a>
-          {% endif %}
-      </div>
-  </div>
+                <a href="{% url 'account:user_login' %}" class="nav-link-modern nav-link-secondary">Login</a>
+                <a href="{% url 'account:user_register' %}" class="nav-link-modern nav-link-primary">Sign Up</a>
+            {% endif %}
+        </div>
+    </div>
 </nav>
+
+<style>
+    .navbar-modern {
+        background: var(--bg-primary);
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: var(--shadow-sm);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.95);
+    }
+
+    .navbar-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navbar-brand-modern {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        transition: color 0.2s ease;
+    }
+
+    .navbar-brand-modern:hover {
+        color: var(--primary-color);
+    }
+
+    .navbar-links {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .nav-link-modern {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        border-radius: var(--radius-sm);
+        transition: all 0.2s ease;
+    }
+
+    .nav-link-modern:hover {
+        color: var(--text-primary);
+        background: var(--bg-secondary);
+    }
+
+    .nav-link-primary {
+        background: var(--primary-color);
+        color: white !important;
+    }
+
+    .nav-link-primary:hover {
+        background: var(--primary-hover);
+        color: white !important;
+    }
+
+    .nav-link-secondary {
+        color: var(--text-secondary);
+    }
+
+    @media (max-width: 768px) {
+        .navbar-container {
+            padding: 1rem;
+        }
+        
+        .navbar-brand-modern {
+            font-size: 1.125rem;
+        }
+        
+        .nav-link-modern {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.8125rem;
+        }
+    }
+</style>

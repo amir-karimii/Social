@@ -2,23 +2,174 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>StackOverflow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Platform</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .jumbotron{
-            padding: 20px;
-            margin-bottom: 20px;
-            background-color: #e9ecef;
+        :root {
+            --primary-color: #6366f1;
+            --primary-hover: #4f46e5;
+            --secondary-color: #8b5cf6;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            min-height: calc(100vh - 80px);
+        }
+
+        .card-modern {
+            background: var(--bg-primary);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card-modern:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .btn-modern {
+            padding: 0.625rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary-modern {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary-modern:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .form-modern {
+            background: var(--bg-primary);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-modern .form-control,
+        .form-modern input[type="text"],
+        .form-modern input[type="email"],
+        .form-modern input[type="password"],
+        .form-modern textarea {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 0.75rem 1rem;
+            font-size: 0.9375rem;
+            transition: all 0.2s ease;
+            background: var(--bg-primary);
+        }
+
+        .form-modern .form-control:focus,
+        .form-modern input:focus,
+        .form-modern textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-modern label {
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .text-muted-modern {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .alert-modern {
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-sm);
+            border: none;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .alert-success {
+            background: #ecfdf5;
+            color: #065f46;
+        }
+
+        .alert-error,
+        .alert-danger {
+            background: #fef2f2;
+            color: #991b1b;
+        }
+
+        .alert-info {
+            background: #eff6ff;
+            color: #1e40af;
+        }
+
+        .alert-warning {
+            background: #fffbeb;
+            color: #92400e;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1.5rem 1rem;
+            }
         }
     </style>
 </head>
 <body>
     {% include 'inc/navbar.html' %}
-    <div class="jumbotron">
+    <div class="main-container">
         {% include 'inc/messages.html' %}
         {% block content %} {% endblock %}
     </div>
-
-
 </body>
 </html>

@@ -1,9 +1,65 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form action="" method="post" novalidate>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Update">
-    </form>
+
+<div style="max-width: 700px; margin: 0 auto;">
+    <div class="page-header" style="margin-bottom: 2rem;">
+        <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Edit Post</h1>
+        <p class="text-muted-modern">Update your post content</p>
+    </div>
+
+    <div class="form-modern">
+        <form action="" method="post" novalidate>
+            {% csrf_token %}
+            {% for field in form %}
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="{{ field.id_for_label }}" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">
+                        {{ field.label }}
+                        {% if field.field.required %}<span style="color: #dc2626;">*</span>{% endif %}
+                    </label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div style="color: #dc2626; font-size: 0.875rem; margin-top: 0.25rem;">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                    {% if field.help_text %}
+                        <div style="color: var(--text-secondary); font-size: 0.75rem; margin-top: 0.25rem;">
+                            {{ field.help_text }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                <a href="{% url 'home:post_detail' post.id post.slug %}" class="btn-modern" style="background: var(--bg-secondary); color: var(--text-primary);">
+                    Cancel
+                </a>
+                <button type="submit" class="btn-modern btn-primary-modern">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 6px;">
+                        <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Update Post
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .form-modern input[type="text"],
+    .form-modern textarea {
+        width: 100%;
+    }
+
+    .form-modern textarea {
+        min-height: 200px;
+        resize: vertical;
+    }
+
+    .form-modern form p {
+        margin-bottom: 0;
+    }
+</style>
+
 {% endblock %}
