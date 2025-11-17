@@ -36,3 +36,6 @@ dist/
 
 # pipenv
 Pipfile.lock
+
+# sqlite
+db.sqlite3
